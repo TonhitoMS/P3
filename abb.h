@@ -116,7 +116,7 @@ void imprimir(abb A);
  */
 int buscarInsertar(abb *A, tipoelem E);
 
-int existeVar(abb A, char* cl);
+int existeComp(abb A, char* cl, int tipo);
 
 double obterValorVar(abb A, char* cl);
 

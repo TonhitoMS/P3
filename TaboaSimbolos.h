@@ -21,7 +21,7 @@ void destruirTaboa();
 
 double obterValor(char* cadea);
 
-int existe(char* cadea);
+int existe(char* cadea, int tipo);
 
 double modOUinsVar(char* cadea, double val);
 

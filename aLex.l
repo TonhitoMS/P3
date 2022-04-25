@@ -84,7 +84,8 @@ CADEA_L			{CADEA_R_L}|{CADEA_I_L}
 
 %%
 
-""
+"limpar"        return LIMPAR;
+"ler"           return LER;
 "sair"          yyterminate();
 "axd"           return AXUDA;
 "verva"         return VERVA;
@@ -107,7 +108,9 @@ CADEA_L			{CADEA_R_L}|{CADEA_I_L}
 
 %%
 
+/*ler arquivo
 
+pechar arquivo*/
 
 
 

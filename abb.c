@@ -255,18 +255,18 @@ int buscarInsertar(abb *A, tipoelem E) {
     }
 }
 
-int existeVar(abb A, char* cl){
+int existeComp(abb A, char* cl, int tipo){
     if (es_vacio(A)) {
         return 0;
     }
     int comp = _comparar_clave_elem(cl, A->info);
 
-    if (comp == 0) { // cl == A->info
+    if (comp == 0 && A->info.tipo == tipo) { // cl == A->info
         return 1;
     } else if (comp < 0) { // cl < A->info
-        return existeVar(A->izq, cl);
+        return existeComp(A->izq, cl, tipo);
     } else { // cl > A->info
-        return existeVar(A->der, cl);
+        return existeComp(A->der, cl, tipo);
     }
 
 }

@@ -54,8 +54,8 @@ int insertarNaTaboa(char* cadea){
     return buscarInsertar(&taboa, elemento);
 }
 
-int existe(char* cadea){
-    return existeVar(taboa, cadea);
+int existe(char* cadea, int tipo){
+    return existeComp(taboa, cadea, tipo);
 }
 
 double obterValor(char* cadea){

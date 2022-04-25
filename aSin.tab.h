@@ -53,7 +53,9 @@ extern int yydebug;
     ID = 259,
     AXUDA = 260,
     VERVA = 261,
-    NEG = 262
+    LIMPAR = 262,
+    LER = 263,
+    NEG = 264
   };
 #endif
 
@@ -61,12 +63,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 15 "aSin.y"
+#line 16 "aSin.y"
 
 double val; /* Para devolver números */
 char *lex; /* Para devolver punteros a la tabla de símbolos */
 
-#line 70 "aSin.tab.h"
+#line 72 "aSin.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
