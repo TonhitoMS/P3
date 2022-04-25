@@ -20,6 +20,9 @@ char *lex; /* Para devolver punteros a la tabla de símbolos */
 /* Declaraciones de BISON */
 %token <val> NUM
 %token <lex> ID
+%token AXUDA
+%token VERVA
+%token LIMPAR
 %type <val> exp
 
 %right '='
@@ -37,6 +40,8 @@ input: /* cadena vacía */
 
 line: '\n'
     | exp '\n' { printf ("\t%.10f\n", $1);}
+    | comando '\n'
+    | comando '\n' ';'
     | error '\n' { yyerrok; }
 ;
 
@@ -52,7 +57,9 @@ exp: NUM { $$ = $1;}
     | ID '=' exp { /* Comprobar se é unha constante cando se modifica */
                         $$ = modOUinsVar($1, $3);
                     }
-    | ID '(' exp ')' { printf("Función\n");; }
+    | ID '(' exp ')' {
+                            $$ = execFunc($1, $3);
+                        }
     | exp '+' exp { $$ = $1 + $3;}
     | exp '-' exp { $$ = $1 - $3; }
     | exp '*' exp { $$ = $1 * $3; }
@@ -60,6 +67,11 @@ exp: NUM { $$ = $1;}
     | '-' exp %prec NEG { $$ = -$2; }
     | exp '^' exp { $$ = pow ($1, $3); }
     | '(' exp ')' { $$ = $2; }
+;
+
+comando:    AXUDA { printf("Axuda\n");}
+        |   VERVA {mostrarVal();}
+        |   LIMPAR {}
 ;
 
 %%

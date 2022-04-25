@@ -84,6 +84,10 @@ CADEA_L			{CADEA_R_L}|{CADEA_I_L}
 
 %%
 
+""
+"sair"          yyterminate();
+"axd"           return AXUDA;
+"verva"         return VERVA;
 {U_LINEANOVA}   return ((int) *yytext);
 {ESPAZOTAB}
 {COM_LINEA}
@@ -98,6 +102,7 @@ CADEA_L			{CADEA_R_L}|{CADEA_I_L}
 {FLOAT_L}		yylval.val = atof(yytext); return NUM;
 {IMAG_L}		return IMAXINARIO;
 .			return -1;
+<<EOF>>         yyterminate();
 	
 
 %%

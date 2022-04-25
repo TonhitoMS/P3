@@ -66,3 +66,12 @@ double modOUinsVar(char* cadea, double val){
     return modInsVar(&taboa, cadea, val);
 }
 
+double execFunc(char* cl, double val){
+    return execFuncVar(taboa, cl, val);
+
+}
+
+void mostrarVal(){
+    imprimirVar(taboa);
+}
+

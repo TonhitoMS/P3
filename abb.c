@@ -219,7 +219,6 @@ void imprimir(abb A){
             imprimir(A->izq);
         printf("Lexema: %-20s\t", A->info.lexema);
         printf("Compoñente Léxico: %d\n", A->info.tipo);
-        printf("Valor: %lf\n", A->info.valor.var);
 
         if(A->der != NULL)
             imprimir(A->der);
@@ -319,5 +318,41 @@ double modInsVar(abb *A, char* cl, double val) {
     }
 }
 
+double execFuncVar(abb A, char* cl, double val){
+
+    if (es_vacio(A)) {
+        return 0;
+    }
+    int comp = _comparar_clave_elem(cl, A->info);
+
+    if (comp == 0) { // cl == A->info
+        return A->info.valor.func(val);
+    } else if (comp < 0) { // cl < A->info
+        return execFuncVar(A->izq, cl, val);
+    } else { // cl > A->info
+        return execFuncVar(A->der, cl, val);
+    }
+
+    return 0;
+}
+
+void imprimirVar(abb A){
+    if(!es_vacio(A) ){
+        if(A->izq != NULL)
+            imprimirVar(A->izq);
+        if(A->info.tipo == ID) {
+            printf("Nome: %-20s\t", A->info.lexema);
+            printf("Valor: %lf\n", A->info.valor.var);
+        }
+
+        if(A->der != NULL)
+            imprimirVar(A->der);
+
+    }
+}
+
+void borrarVar(){
+
+}
 
 

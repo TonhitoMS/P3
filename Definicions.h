@@ -1,5 +1,5 @@
-#ifndef P1_DEFINICIONS_H
-#define P1_DEFINICIONS_H
+#ifndef DEFINICIONS_H
+#define DEFINICIONS_H
 
 //constantes
 #define PI 3.14159265358979323846
@@ -23,4 +23,4 @@
 
 
 
-#endif //P1_DEFINICIONS_H
+#endif //DEFINICIONS_H

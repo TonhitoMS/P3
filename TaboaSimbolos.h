@@ -25,5 +25,9 @@ int existe(char* cadea);
 
 double modOUinsVar(char* cadea, double val);
 
+double execFunc(char* cl, double val);
+
+void mostrarVal();
+
 
 #endif //P1_TABOASIMBOLOS_H

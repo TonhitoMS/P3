@@ -122,6 +122,10 @@ double obterValorVar(abb A, char* cl);
 
 double modInsVar(abb *A, char* cadea, double val);
 
+double execFuncVar(abb A, char* cl, double val);
+
+void imprimirVar(abb A);
+
 
 #endif	// ABB_H
 
