@@ -9,7 +9,8 @@
 
 
 void yyerror(char* s);
-
+void simbolo();
+extern int imp = 1;
 
 %}
 
@@ -47,8 +48,8 @@ input: /* cadena vacía */
 ;
 
 line: '\n'
-    | exp '\n' { printf ("\t%.10f\n> ", $1);}
-    | exp ';' '\n' {printf("\n> ");}
+    | exp '\n' { printf ("\t%.10f\n", $1); simbolo();}
+    | exp ';' '\n' {printf("\n"); simbolo();}
     | comando '\n'
     | comando '\n' ';'
     | error '\n' { yyclearin; }
@@ -70,7 +71,8 @@ exp: NUM { $$ = $1;}
                         $$ = modOUinsVar($1, $3);
                     }
                     else{
-                        printf("%s é unha constante\n> ", $1);
+                        printf("%s é unha constante\n", $1);
+                        simbolo();
                     }
                     free($1);
                 }
@@ -87,12 +89,14 @@ exp: NUM { $$ = $1;}
     | '(' exp ')' { $$ = $2; }
 ;
 
-comando:    AXUDA { printf("Axuda\n> ");}
+comando:    AXUDA { printf("Axuda\n"); simbolo();}
         |   VERVA {
                     mostrarVal();
-                    printf("\n> ");
+                    printf("\n");
+                    simbolo();
                     }
         |   LER '(' ARQUIVO ')' {
+                                    imp=0;
                                     iniciar($3);
                                     free($3);
                                 }
@@ -103,5 +107,11 @@ comando:    AXUDA { printf("Axuda\n> ");}
 
 void yyerror(char* s)
 {
-printf ("%s\n> ", s);
+    printf ("%s\n", s);
+    simbolo();
+}
+
+void simbolo(){
+    if(imp)
+        printf("> ");
 }

@@ -78,10 +78,11 @@
 
 
 void yyerror(char* s);
+void simbolo();
+extern int imp = 1;
 
 
-
-#line 85 "aSin.tab.c"
+#line 86 "aSin.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -144,12 +145,12 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "aSin.y"
+#line 17 "aSin.y"
 
 double val; /* Para devolver números */
 char *lex; /* Para devolver punteros a la tabla de símbolos */
 
-#line 153 "aSin.tab.c"
+#line 154 "aSin.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -525,9 +526,9 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int8 yyrline[] =
 {
-       0,    45,    45,    46,    49,    50,    51,    52,    53,    54,
-      57,    58,    69,    77,    81,    82,    83,    84,    85,    86,
-      87,    90,    91,    95,    99
+       0,    46,    46,    47,    50,    51,    52,    53,    54,    55,
+      58,    59,    70,    79,    83,    84,    85,    86,    87,    88,
+      89,    92,    93,    98,   103
 };
 #endif
 
@@ -1084,15 +1085,15 @@ yydestruct (const char *yymsg, int yytype, YYSTYPE *yyvaluep)
   switch (yytype)
     {
     case 4: /* ID  */
-#line 22 "aSin.y"
+#line 23 "aSin.y"
             { free(((*yyvaluep).lex));}
-#line 1090 "aSin.tab.c"
+#line 1091 "aSin.tab.c"
         break;
 
     case 9: /* ARQUIVO  */
-#line 23 "aSin.y"
+#line 24 "aSin.y"
             { free(((*yyvaluep).lex));}
-#line 1096 "aSin.tab.c"
+#line 1097 "aSin.tab.c"
         break;
 
       default:
@@ -1360,31 +1361,31 @@ yyreduce:
   switch (yyn)
     {
   case 5:
-#line 50 "aSin.y"
-               { printf ("\t%.10f\n> ", (yyvsp[-1].val));}
-#line 1366 "aSin.tab.c"
+#line 51 "aSin.y"
+               { printf ("\t%.10f\n", (yyvsp[-1].val)); simbolo();}
+#line 1367 "aSin.tab.c"
     break;
 
   case 6:
-#line 51 "aSin.y"
-                   {printf("\n> ");}
-#line 1372 "aSin.tab.c"
+#line 52 "aSin.y"
+                   {printf("\n"); simbolo();}
+#line 1373 "aSin.tab.c"
     break;
 
   case 9:
-#line 54 "aSin.y"
+#line 55 "aSin.y"
                  { yyclearin; }
-#line 1378 "aSin.tab.c"
+#line 1379 "aSin.tab.c"
     break;
 
   case 10:
-#line 57 "aSin.y"
+#line 58 "aSin.y"
          { (yyval.val) = (yyvsp[0].val);}
-#line 1384 "aSin.tab.c"
+#line 1385 "aSin.tab.c"
     break;
 
   case 11:
-#line 58 "aSin.y"
+#line 59 "aSin.y"
             {
                 if(existe((yyvsp[0].lex), ID) || existe((yyvsp[0].lex), CONS)){
                     (yyval.val) = obterValor((yyvsp[0].lex));
@@ -1396,105 +1397,108 @@ yyreduce:
                 }
                 free((yyvsp[0].lex));
             }
-#line 1400 "aSin.tab.c"
+#line 1401 "aSin.tab.c"
     break;
 
   case 12:
-#line 69 "aSin.y"
+#line 70 "aSin.y"
                  { if(!existe((yyvsp[-2].lex), CONS)){
                         (yyval.val) = modOUinsVar((yyvsp[-2].lex), (yyvsp[0].val));
                     }
                     else{
-                        printf("%s é unha constante\n> ", (yyvsp[-2].lex));
+                        printf("%s é unha constante\n", (yyvsp[-2].lex));
+                        simbolo();
                     }
                     free((yyvsp[-2].lex));
                 }
-#line 1413 "aSin.tab.c"
+#line 1415 "aSin.tab.c"
     break;
 
   case 13:
-#line 77 "aSin.y"
+#line 79 "aSin.y"
                      {
                             (yyval.val) = execFunc((yyvsp[-3].lex), (yyvsp[-1].val));
                             free((yyvsp[-3].lex));
                         }
-#line 1422 "aSin.tab.c"
+#line 1424 "aSin.tab.c"
     break;
 
   case 14:
-#line 81 "aSin.y"
+#line 83 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) + (yyvsp[0].val);}
-#line 1428 "aSin.tab.c"
+#line 1430 "aSin.tab.c"
     break;
 
   case 15:
-#line 82 "aSin.y"
+#line 84 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) - (yyvsp[0].val); }
-#line 1434 "aSin.tab.c"
+#line 1436 "aSin.tab.c"
     break;
 
   case 16:
-#line 83 "aSin.y"
+#line 85 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) * (yyvsp[0].val); }
-#line 1440 "aSin.tab.c"
+#line 1442 "aSin.tab.c"
     break;
 
   case 17:
-#line 84 "aSin.y"
+#line 86 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) / (yyvsp[0].val); }
-#line 1446 "aSin.tab.c"
+#line 1448 "aSin.tab.c"
     break;
 
   case 18:
-#line 85 "aSin.y"
+#line 87 "aSin.y"
                         { (yyval.val) = -(yyvsp[0].val); }
-#line 1452 "aSin.tab.c"
+#line 1454 "aSin.tab.c"
     break;
 
   case 19:
-#line 86 "aSin.y"
+#line 88 "aSin.y"
                   { (yyval.val) = pow ((yyvsp[-2].val), (yyvsp[0].val)); }
-#line 1458 "aSin.tab.c"
+#line 1460 "aSin.tab.c"
     break;
 
   case 20:
-#line 87 "aSin.y"
+#line 89 "aSin.y"
                   { (yyval.val) = (yyvsp[-1].val); }
-#line 1464 "aSin.tab.c"
+#line 1466 "aSin.tab.c"
     break;
 
   case 21:
-#line 90 "aSin.y"
-                  { printf("Axuda\n> ");}
-#line 1470 "aSin.tab.c"
+#line 92 "aSin.y"
+                  { printf("Axuda\n"); simbolo();}
+#line 1472 "aSin.tab.c"
     break;
 
   case 22:
-#line 91 "aSin.y"
+#line 93 "aSin.y"
                   {
                     mostrarVal();
-                    printf("\n> ");
+                    printf("\n");
+                    simbolo();
                     }
-#line 1479 "aSin.tab.c"
+#line 1482 "aSin.tab.c"
     break;
 
   case 23:
-#line 95 "aSin.y"
+#line 98 "aSin.y"
                                 {
+                                    imp=0;
                                     iniciar((yyvsp[-1].lex));
                                     free((yyvsp[-1].lex));
                                 }
-#line 1488 "aSin.tab.c"
+#line 1492 "aSin.tab.c"
     break;
 
   case 24:
-#line 99 "aSin.y"
+#line 103 "aSin.y"
                    {destruirTaboa(); inicioTaboa();}
-#line 1494 "aSin.tab.c"
+#line 1498 "aSin.tab.c"
     break;
 
 
-#line 1498 "aSin.tab.c"
+#line 1502 "aSin.tab.c"
 
       default: break;
     }
@@ -1726,10 +1730,16 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 102 "aSin.y"
+#line 106 "aSin.y"
 
 
 void yyerror(char* s)
 {
-printf ("%s\n> ", s);
+    printf ("%s\n", s);
+    simbolo();
+}
+
+void simbolo(){
+    if(imp)
+        printf("> ");
 }

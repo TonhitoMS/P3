@@ -12,6 +12,7 @@
 #include "aSin.tab.h"
 #include <stdlib.h>
 
+extern int imp;
 %}
 /* 	
 	opcións para evitar erros e warnings,
@@ -100,6 +101,7 @@ void iniciar(char* arquivo){
 // pechamos o ficheiro cando rematamos a análise
 void pechar(){
 	fclose(yyin);
+	imp=1;
 }
 
 

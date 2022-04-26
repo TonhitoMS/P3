@@ -561,7 +561,8 @@ char *yytext;
 #include "aSin.tab.h"
 #include <stdlib.h>
 
-#line 565 "lex.yy.c"
+extern int imp;
+#line 566 "lex.yy.c"
 /* 	
 	opcións para evitar erros e warnings,
 	e para almacenar o número de liñas na
@@ -574,7 +575,7 @@ char *yytext;
 	As regras devolven o valor correspondente do arquivo 
 	de definicións, segundo o patrón que se emparelle coa entrada.
 */
-#line 578 "lex.yy.c"
+#line 579 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -789,10 +790,10 @@ YY_DECL
 		}
 
 	{
-#line 67 "aLex.l"
+#line 68 "aLex.l"
 
 
-#line 796 "lex.yy.c"
+#line 797 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -861,111 +862,111 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 69 "aLex.l"
+#line 70 "aLex.l"
 return LIMPAR;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 70 "aLex.l"
+#line 71 "aLex.l"
 return LER;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 71 "aLex.l"
+#line 72 "aLex.l"
 yyterminate();
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 72 "aLex.l"
+#line 73 "aLex.l"
 return AXUDA;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 73 "aLex.l"
+#line 74 "aLex.l"
 return VERVA;
 	YY_BREAK
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 74 "aLex.l"
+#line 75 "aLex.l"
 return ((int) *yytext);
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 75 "aLex.l"
+#line 76 "aLex.l"
 
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 76 "aLex.l"
+#line 77 "aLex.l"
 
 	YY_BREAK
 case 9:
 /* rule 9 can match eol */
 YY_RULE_SETUP
-#line 77 "aLex.l"
+#line 78 "aLex.l"
 
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 78 "aLex.l"
+#line 79 "aLex.l"
 yylval.lex = strdup(yytext); return ID;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 79 "aLex.l"
+#line 80 "aLex.l"
 return OP_ASIG;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 80 "aLex.l"
+#line 81 "aLex.l"
 return OP_FRECHA;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 81 "aLex.l"
+#line 82 "aLex.l"
 return OP_SUMA_ASIG;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 82 "aLex.l"
+#line 83 "aLex.l"
 return (int) *yytext;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 83 "aLex.l"
+#line 84 "aLex.l"
 yylval.val = atof(yytext); return NUM;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 84 "aLex.l"
+#line 85 "aLex.l"
 yylval.val = atof(yytext); return NUM;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 85 "aLex.l"
+#line 86 "aLex.l"
 return IMAXINARIO;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 86 "aLex.l"
+#line 87 "aLex.l"
 yylval.lex = strdup(yytext); return ARQUIVO;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 87 "aLex.l"
+#line 88 "aLex.l"
 return -1;
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 88 "aLex.l"
+#line 89 "aLex.l"
 pechar(); yyrestart(stdin);
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 91 "aLex.l"
+#line 92 "aLex.l"
 ECHO;
 	YY_BREAK
-#line 969 "lex.yy.c"
+#line 970 "lex.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1939,7 +1940,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 91 "aLex.l"
+#line 92 "aLex.l"
 
 
 void iniciar(char* arquivo){
@@ -1952,6 +1953,7 @@ void iniciar(char* arquivo){
 // pechamos o ficheiro cando rematamos a análise
 void pechar(){
 	fclose(yyin);
+	imp=1;
 }
 
 

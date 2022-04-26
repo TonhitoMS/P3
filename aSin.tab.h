@@ -64,7 +64,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 16 "aSin.y"
+#line 17 "aSin.y"
 
 double val; /* Para devolver números */
 char *lex; /* Para devolver punteros a la tabla de símbolos */
