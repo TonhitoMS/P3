@@ -36,6 +36,8 @@ void imprimirTaboa(){
     printf("\n\n-------------------Táboa de símbolos-------------------\n");
     imprimir(taboa);
     printf("-------------------------------------------------------\n\n");
+    printf("\n> ");
+
 
 }
 

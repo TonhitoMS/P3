@@ -47,8 +47,8 @@ input: /* cadena vacía */
 ;
 
 line: '\n'
-    | exp '\n' { printf ("\t%.10f\n", $1);}
-    | exp ';' '\n' {printf("\n");}
+    | exp '\n' { printf ("\t%.10f\n> ", $1);}
+    | exp ';' '\n' {printf("\n> ");}
     | comando '\n'
     | comando '\n' ';'
     | error '\n' { yyclearin; }
@@ -61,6 +61,7 @@ exp: NUM { $$ = $1;}
                 }
                 else{
                     yyerror("A variable non foi inicializada\n");
+                    free($1);
                     YYERROR;
                 }
                 free($1);
@@ -69,12 +70,13 @@ exp: NUM { $$ = $1;}
                         $$ = modOUinsVar($1, $3);
                     }
                     else{
-                        printf("%s é unha constante\n", $1);
+                        printf("%s é unha constante\n> ", $1);
                     }
                     free($1);
                 }
     | ID '(' exp ')' {
                             $$ = execFunc($1, $3);
+                            free($1);
                         }
     | exp '+' exp { $$ = $1 + $3;}
     | exp '-' exp { $$ = $1 - $3; }
@@ -85,8 +87,11 @@ exp: NUM { $$ = $1;}
     | '(' exp ')' { $$ = $2; }
 ;
 
-comando:    AXUDA { printf("Axuda\n");}
-        |   VERVA {mostrarVal();}
+comando:    AXUDA { printf("Axuda\n> ");}
+        |   VERVA {
+                    mostrarVal();
+                    printf("\n> ");
+                    }
         |   LER '(' ARQUIVO ')' {
                                     iniciar($3);
                                     free($3);
@@ -98,5 +103,5 @@ comando:    AXUDA { printf("Axuda\n");}
 
 void yyerror(char* s)
 {
-printf ("%s\n", s);
+printf ("%s\n> ", s);
 }
