@@ -6,8 +6,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+int imp;
 
-int main() {
+int main(int argc, char **argv) {
     //char numero[20];
     //inicializamos a táboa de símbolos e o analizador flex
     inicioTaboa();
@@ -16,8 +17,15 @@ int main() {
 
     //comezamos a análise do ficheiro indicado anteriormente
     //analise();
-    /*scanf("%s", numero);
-    printf("Número: %f\n", atof(numero));*/
+    imp = 1;
+    if(argc > 2){
+        printf("Introduce %s e opcionalmente un arquivo para realizar a lectura\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    else if(argc == 2){
+        iniciar(argv[1]);
+    }
+
     yyparse();
 
 

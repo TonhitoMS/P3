@@ -79,7 +79,7 @@
 
 void yyerror(char* s);
 void simbolo();
-extern int imp = 1;
+int imp;
 
 
 #line 86 "aSin.tab.c"
@@ -527,8 +527,8 @@ static const yytype_int8 yytranslate[] =
 static const yytype_int8 yyrline[] =
 {
        0,    46,    46,    47,    50,    51,    52,    53,    54,    55,
-      58,    59,    70,    79,    83,    84,    85,    86,    87,    88,
-      89,    92,    93,    98,   103
+      58,    59,    70,    80,    84,    85,    86,    87,    88,    89,
+      90,    93,    94,    99,   104
 };
 #endif
 
@@ -1406,99 +1406,100 @@ yyreduce:
                         (yyval.val) = modOUinsVar((yyvsp[-2].lex), (yyvsp[0].val));
                     }
                     else{
-                        printf("%s é unha constante\n", (yyvsp[-2].lex));
-                        simbolo();
+                        yyerror("O identificador é unha constante\n");
+                        free((yyvsp[-2].lex));
+                        YYERROR;
                     }
                     free((yyvsp[-2].lex));
                 }
-#line 1415 "aSin.tab.c"
+#line 1416 "aSin.tab.c"
     break;
 
   case 13:
-#line 79 "aSin.y"
+#line 80 "aSin.y"
                      {
                             (yyval.val) = execFunc((yyvsp[-3].lex), (yyvsp[-1].val));
                             free((yyvsp[-3].lex));
                         }
-#line 1424 "aSin.tab.c"
+#line 1425 "aSin.tab.c"
     break;
 
   case 14:
-#line 83 "aSin.y"
+#line 84 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) + (yyvsp[0].val);}
-#line 1430 "aSin.tab.c"
+#line 1431 "aSin.tab.c"
     break;
 
   case 15:
-#line 84 "aSin.y"
+#line 85 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) - (yyvsp[0].val); }
-#line 1436 "aSin.tab.c"
+#line 1437 "aSin.tab.c"
     break;
 
   case 16:
-#line 85 "aSin.y"
+#line 86 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) * (yyvsp[0].val); }
-#line 1442 "aSin.tab.c"
+#line 1443 "aSin.tab.c"
     break;
 
   case 17:
-#line 86 "aSin.y"
+#line 87 "aSin.y"
                   { (yyval.val) = (yyvsp[-2].val) / (yyvsp[0].val); }
-#line 1448 "aSin.tab.c"
+#line 1449 "aSin.tab.c"
     break;
 
   case 18:
-#line 87 "aSin.y"
+#line 88 "aSin.y"
                         { (yyval.val) = -(yyvsp[0].val); }
-#line 1454 "aSin.tab.c"
+#line 1455 "aSin.tab.c"
     break;
 
   case 19:
-#line 88 "aSin.y"
+#line 89 "aSin.y"
                   { (yyval.val) = pow ((yyvsp[-2].val), (yyvsp[0].val)); }
-#line 1460 "aSin.tab.c"
+#line 1461 "aSin.tab.c"
     break;
 
   case 20:
-#line 89 "aSin.y"
+#line 90 "aSin.y"
                   { (yyval.val) = (yyvsp[-1].val); }
-#line 1466 "aSin.tab.c"
+#line 1467 "aSin.tab.c"
     break;
 
   case 21:
-#line 92 "aSin.y"
+#line 93 "aSin.y"
                   { printf("Axuda\n"); simbolo();}
-#line 1472 "aSin.tab.c"
+#line 1473 "aSin.tab.c"
     break;
 
   case 22:
-#line 93 "aSin.y"
+#line 94 "aSin.y"
                   {
                     mostrarVal();
                     printf("\n");
                     simbolo();
                     }
-#line 1482 "aSin.tab.c"
+#line 1483 "aSin.tab.c"
     break;
 
   case 23:
-#line 98 "aSin.y"
+#line 99 "aSin.y"
                                 {
-                                    imp=0;
                                     iniciar((yyvsp[-1].lex));
                                     free((yyvsp[-1].lex));
+                                    simbolo();
                                 }
-#line 1492 "aSin.tab.c"
+#line 1493 "aSin.tab.c"
     break;
 
   case 24:
-#line 103 "aSin.y"
-                   {destruirTaboa(); inicioTaboa();}
-#line 1498 "aSin.tab.c"
+#line 104 "aSin.y"
+                   {destruirTaboa(); inicioTaboa(); simbolo();}
+#line 1499 "aSin.tab.c"
     break;
 
 
-#line 1502 "aSin.tab.c"
+#line 1503 "aSin.tab.c"
 
       default: break;
     }
@@ -1730,7 +1731,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 106 "aSin.y"
+#line 107 "aSin.y"
 
 
 void yyerror(char* s)

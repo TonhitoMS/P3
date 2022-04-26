@@ -86,16 +86,18 @@ FICHEIRO         ({LETRA}|{U_NUMERO}|\.)+
 {IMAG_L}		return IMAXINARIO;
 {FICHEIRO}       yylval.lex = strdup(yytext); return ARQUIVO;
 .			return -1;
-<<EOF>>         pechar(); yyrestart(stdin);
-	
+<<EOF>>         {pechar(); yyrestart(stdin); printf("> ");}
+
 
 %%
 
 void iniciar(char* arquivo){
 	//abrimos os arquivo comprobando os posibles erros
+
 	printf("Abrindo %s\n", arquivo);
 	if((yyin = fopen(arquivo, "r")) == NULL)
 		erroLE("Erro abrindo o ficheiro\n");
+    imp = 0;
 }
 
 // pechamos o ficheiro cando rematamos a análise

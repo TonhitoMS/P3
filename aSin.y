@@ -10,7 +10,7 @@
 
 void yyerror(char* s);
 void simbolo();
-extern int imp = 1;
+int imp;
 
 %}
 
@@ -71,8 +71,9 @@ exp: NUM { $$ = $1;}
                         $$ = modOUinsVar($1, $3);
                     }
                     else{
-                        printf("%s é unha constante\n", $1);
-                        simbolo();
+                        yyerror("O identificador é unha constante\n");
+                        free($1);
+                        YYERROR;
                     }
                     free($1);
                 }
@@ -96,11 +97,11 @@ comando:    AXUDA { printf("Axuda\n"); simbolo();}
                     simbolo();
                     }
         |   LER '(' ARQUIVO ')' {
-                                    imp=0;
                                     iniciar($3);
                                     free($3);
+                                    simbolo();
                                 }
-        |   LIMPAR {destruirTaboa(); inicioTaboa();}
+        |   LIMPAR {destruirTaboa(); inicioTaboa(); simbolo();}
 ;
 
 %%

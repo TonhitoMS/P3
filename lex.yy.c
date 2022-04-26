@@ -959,7 +959,7 @@ return -1;
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
 #line 89 "aLex.l"
-pechar(); yyrestart(stdin);
+{pechar(); yyrestart(stdin); printf("> ");}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
@@ -1945,9 +1945,11 @@ void yyfree (void * ptr )
 
 void iniciar(char* arquivo){
 	//abrimos os arquivo comprobando os posibles erros
+
 	printf("Abrindo %s\n", arquivo);
 	if((yyin = fopen(arquivo, "r")) == NULL)
 		erroLE("Erro abrindo o ficheiro\n");
+    imp = 0;
 }
 
 // pechamos o ficheiro cando rematamos a análise
