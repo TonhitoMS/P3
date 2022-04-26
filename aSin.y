@@ -18,7 +18,9 @@ double val; /* Para devolver números */
 char *lex; /* Para devolver punteros a la tabla de símbolos */
 }
 
-
+//directiva para liberar a memoria dunha cadea en caso de erro
+%destructor { free($$);} <lex>
+%destructor { free($$);} ARQUIVO
 
 /* Declaraciones de BISON */
 %token <val> NUM
@@ -27,6 +29,8 @@ char *lex; /* Para devolver punteros a la tabla de símbolos */
 %token VERVA
 %token LIMPAR
 %token LER
+%token ARQUIVO
+%type <lex>ARQUIVO
 %type <val> exp
 
 %right '='
@@ -44,6 +48,7 @@ input: /* cadena vacía */
 
 line: '\n'
     | exp '\n' { printf ("\t%.10f\n", $1);}
+    | exp ';' '\n' {printf("\n");}
     | comando '\n'
     | comando '\n' ';'
     | error '\n' { yyclearin; }
@@ -51,11 +56,12 @@ line: '\n'
 
 exp: NUM { $$ = $1;}
     | ID    {
-                if(existe($1, ID)){
+                if(existe($1, ID) || existe($1, CONS)){
                     $$ = obterValor($1);
                 }
                 else{
                     yyerror("A variable non foi inicializada\n");
+                    YYERROR;
                 }
                 free($1);
             }
@@ -81,7 +87,10 @@ exp: NUM { $$ = $1;}
 
 comando:    AXUDA { printf("Axuda\n");}
         |   VERVA {mostrarVal();}
-        |   LER {/*empezar ficheiro*/ printf("Ler");}
+        |   LER '(' ARQUIVO ')' {
+                                    iniciar($3);
+                                    free($3);
+                                }
         |   LIMPAR {destruirTaboa(); inicioTaboa();}
 ;
 

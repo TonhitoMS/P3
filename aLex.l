@@ -50,36 +50,18 @@ OP_SUMA_ASIG		\+=
 OPEPUN			[+\-*/%&|^<>=!~,.;:[\]{}()]
 
 DECIMAL_DS		{DECIMAL_D}(_?{DECIMAL_D})*
-OCTAL_DS		{OCTAL_D}(_?{OCTAL_D})*
-BIN_DS			{BIN_D}(_?{BIN_D})*
-HEX_DS			{HEX_D}(_?{HEX_D})*
 DECIMAL_L		0|([1-9]_?{DECIMAL_DS}?)
-BIN_L			0[Bb]_?{BIN_DS}
-OCTAL_L			0[Oo]?_?{OCTAL_DS}
-HEX_L			0[Xx]_?{HEX_DS}
-INT_L			{DECIMAL_L}|{OCTAL_L}|{HEX_L}|{BIN_L} 
+INT_L			{DECIMAL_L}
 
-HEX_E			[Pp][+-]?{DECIMAL_DS}
-HEX_M			_?{HEX_DS}\.{HEX_DS}?|_?{HEX_DS}|\.{HEX_DS}
-HEX_FL_L		0[Xx]{HEX_M}{HEX_E}
+
 DECIMAL_E		[Ee][+-]?{DECIMAL_DS}
 DECIMAL_FL_L		({DECIMAL_DS}\.{DECIMAL_DS}?{DECIMAL_E}?)|({DECIMAL_DS}{DECIMAL_E})|(\.{DECIMAL_DS}{DECIMAL_E}?)
-FLOAT_L			{DECIMAL_FL_L}|{HEX_FL_L} 
+FLOAT_L			{DECIMAL_FL_L}
 
 IMAG_L			({DECIMAL_DS}|{INT_L}|{FLOAT_L})i 
 
-ESC_LETRA		\\[abfnrtv'"\\]
-GRAN_U_V		\\U{HEX_D}[8]
-MINI_U_V		\\u{HEX_D}[4]
-HEX_B_V			\\x{HEX_D}[2]
-OCTAL_B_V		\\{OCTAL_D}[3]
-BYTE_V			{OCTAL_B_V}|{HEX_B_V}
-UNICODE_V		{U_CARACTER}|{MINI_U_V}|{GRAN_U_V}|{ESC_LETRA}
-RUNE_L			['](UNICODE_V|BYTE_VALUE)[']
 
-CADEA_I_L		["]({UNICODE_V}|{BYTE_V})*["]
-CADEA_R_L		[']({U_CARACTER}|{U_LINEANOVA})*[']
-CADEA_L			{CADEA_R_L}|{CADEA_I_L}
+FICHEIRO         ({LETRA}|{U_NUMERO}|\.)+
 
 
 %%
@@ -98,19 +80,27 @@ CADEA_L			{CADEA_R_L}|{CADEA_I_L}
 {OP_FRECHA}		return OP_FRECHA;
 {OP_SUMA_ASIG}		return OP_SUMA_ASIG;
 {OPEPUN}		return (int) *yytext;
-{CADEA_L}		return STRING;
 {INT_L}			yylval.val = atof(yytext); return NUM;
 {FLOAT_L}		yylval.val = atof(yytext); return NUM;
 {IMAG_L}		return IMAXINARIO;
+{FICHEIRO}       yylval.lex = strdup(yytext); return ARQUIVO;
 .			return -1;
-<<EOF>>         yyterminate();
+<<EOF>>         pechar(); yyrestart(stdin);
 	
 
 %%
 
-/*ler arquivo
+void iniciar(char* arquivo){
+	//abrimos os arquivo comprobando os posibles erros
+	printf("Abrindo %s\n", arquivo);
+	if((yyin = fopen(arquivo, "r")) == NULL)
+		erroLE("Erro abrindo o ficheiro\n");
+}
 
-pechar arquivo*/
+// pechamos o ficheiro cando rematamos a análise
+void pechar(){
+	fclose(yyin);
+}
 
 
 

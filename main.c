@@ -28,6 +28,7 @@ int main() {
     //pechar();
 
     //eliminamos a táboa de símbolos (liberando a memoria asociada)
+    printf("Eliminando táboa\n");
     destruirTaboa();
 
     return 0;
