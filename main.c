@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 
 
     //imprimimos a táboa de símbolos ao finalizar a análise
-    //imprimirTaboa();
+    imprimirTaboa();
 
 
     //eliminamos a táboa de símbolos (liberando a memoria asociada)
