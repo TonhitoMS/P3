@@ -10,13 +10,22 @@
 abb taboa;
 
 void inicioTaboa(){
-    // array de estruturas que conteñen as palabras reservadas e o número asociado
+    // array de estruturas que conteñen as palabras reservadas e o número asociado, así como o valor ou o punteiro a función
     tipoelem palabras[] = {
             {"pi", CONS, .valor.var = PI},
             {"e", CONS, .valor.var = EU},
             {"sen", FUNC, .valor.func = sin},
             {"cos", FUNC, .valor.func = cos},
+            {"tan", FUNC, .valor.func = tan},
+            {"asen", FUNC, .valor.func = asin},
+            {"acos", FUNC, .valor.func = acos},
+            {"atan", FUNC, .valor.func = atan},
             {"sqrt", FUNC, .valor.func = sqrt},
+            {"pow", FUNC, .valor.func = pow},
+            {"mod", FUNC, .valor.func = fmod},
+            {"exp", FUNC, .valor.func = exp},
+            {"ln", FUNC, .valor.func = log},
+            {"log", FUNC, .valor.func = log10},
     };
 
     // inicializamos a estrutura de datos
@@ -72,7 +81,14 @@ double execFunc(char* cl, double val){
 
 }
 
+double exec2Func(char* cl, double val1, double val2){
+    return execFunc2Var(taboa, cl, val1, val2);
+
+}
+
 void mostrarVal(){
+    printf("\n\n-------------------Espazo de traballo-------------------\n");
     imprimirVar(taboa);
+    printf("--------------------------------------------------------\n\n");
 }
 

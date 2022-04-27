@@ -336,6 +336,25 @@ double execFuncVar(abb A, char* cl, double val){
     return 0;
 }
 
+double execFunc2Var(abb A, char* cl, double val1, double val2){
+
+    if (es_vacio(A)) {
+        return 0;
+    }
+    int comp = _comparar_clave_elem(cl, A->info);
+
+    if (comp == 0) { // cl == A->info
+        //printf("%lf\n", A->info.valor.func(val1, val2));
+        return A->info.valor.func(val1, val2);
+    } else if (comp < 0) { // cl < A->info
+        return execFunc2Var(A->izq, cl, val1, val2);
+    } else { // cl > A->info
+        return execFunc2Var(A->der, cl, val1, val2);
+    }
+
+    return 0;
+}
+
 void imprimirVar(abb A){
     if(!es_vacio(A) ){
         if(A->izq != NULL)
@@ -351,8 +370,5 @@ void imprimirVar(abb A){
     }
 }
 
-void borrarVar(){
-
-}
 
 

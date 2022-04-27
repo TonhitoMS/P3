@@ -19,14 +19,22 @@ void imprimirTaboa();
  * */
 void destruirTaboa();
 
+//obtén o valor dunha variable ou constante
 double obterValor(char* cadea);
 
+//comproba se existe un lexema na táboa
 int existe(char* cadea, int tipo);
 
+//inserta ou modifica unha variable
 double modOUinsVar(char* cadea, double val);
 
+// executa unha función dunha variable
 double execFunc(char* cl, double val);
 
+// executa unha función de dúas variables
+double exec2Func(char* cl, double val1, double val2);
+
+// imprime o espazo de traballo
 void mostrarVal();
 
 

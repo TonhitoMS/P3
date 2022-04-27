@@ -116,15 +116,25 @@ void imprimir(abb A);
  */
 int buscarInsertar(abb *A, tipoelem E);
 
+//Comproba se existe un lexema do tipo determinado
 int existeComp(abb A, char* cl, int tipo);
 
+//devolve o valor dunha variable
 double obterValorVar(abb A, char* cl);
 
+//modifica ou inserta unha variable e o seu valor
 double modInsVar(abb *A, char* cadea, double val);
 
+//executa unha función dunha variable
 double execFuncVar(abb A, char* cl, double val);
 
+//executa unha función de dúas variables
+double execFunc2Var(abb A, char* cl, double val1, double val2);
+
+//imprime o espazo de traballo
 void imprimirVar(abb A);
+
+
 
 
 #endif	// ABB_H

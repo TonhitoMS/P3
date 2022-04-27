@@ -1,24 +1,13 @@
 #ifndef DEFINICIONS_H
 #define DEFINICIONS_H
 
-//constantes
+// constantes
 #define PI 3.14159265358979323846
 #define EU 2.71828182845904523536
 
-//Palabras reservadas
-
-#define CONS 273 //package
-#define FUNC 275 //func
-//#define VAR 277 //var
-#define BLANK 283 //_
-//Fin palabras reservadas
-
-#define OP_ASIG 284 //:=
-#define OP_FRECHA 285 //<-
-#define OP_SUMA_ASIG 286 //+=
-#define STRING 287
-#define ENTEIRO 288
-#define IMAXINARIO 289
+// identificadores
+#define CONS 273
+#define FUNC 275
 #define IDENTIFICADOR 290
 
 

@@ -45,9 +45,7 @@ COM_BLOQUE		"/*"[^{FIN_COM_BLOQUE}]*"*/"
 
 IDENTIFICADOR		{LETRA}({LETRA}|{U_NUMERO})*
 
-OP_ASIG			:=
-OP_FRECHA		<-
-OP_SUMA_ASIG		\+=
+
 OPEPUN			[+\-*/%&|^<>=!~,.;:[\]{}()]
 
 DECIMAL_DS		{DECIMAL_D}(_?{DECIMAL_D})*
@@ -59,7 +57,7 @@ DECIMAL_E		[Ee][+-]?{DECIMAL_DS}
 DECIMAL_FL_L		({DECIMAL_DS}\.{DECIMAL_DS}?{DECIMAL_E}?)|({DECIMAL_DS}{DECIMAL_E})|(\.{DECIMAL_DS}{DECIMAL_E}?)
 FLOAT_L			{DECIMAL_FL_L}
 
-IMAG_L			({DECIMAL_DS}|{INT_L}|{FLOAT_L})i 
+
 
 
 FICHEIRO         ({LETRA}|{U_NUMERO}|\.)+
@@ -77,15 +75,11 @@ FICHEIRO         ({LETRA}|{U_NUMERO}|\.)+
 {COM_LINEA}
 {COM_BLOQUE}
 {IDENTIFICADOR}		yylval.lex = strdup(yytext); return ID;
-{OP_ASIG}		return OP_ASIG;
-{OP_FRECHA}		return OP_FRECHA;
-{OP_SUMA_ASIG}		return OP_SUMA_ASIG;
 {OPEPUN}		return (int) *yytext;
 {INT_L}			yylval.val = atof(yytext); return NUM;
 {FLOAT_L}		yylval.val = atof(yytext); return NUM;
-{IMAG_L}		return IMAXINARIO;
 {FICHEIRO}       yylval.lex = strdup(yytext); return ARQUIVO;
-.			return -1;
+.		    	erroLexico(yylineno);
 <<EOF>>         {pechar(); yyrestart(stdin); printf("> ");}
 
 
@@ -97,6 +91,8 @@ void iniciar(char* arquivo){
 	printf("Abrindo %s\n", arquivo);
 	if((yyin = fopen(arquivo, "r")) == NULL)
 		erroLE("Erro abrindo o ficheiro\n");
+
+	// desactivamos a impresión do símbolo '>'
     imp = 0;
 }
 

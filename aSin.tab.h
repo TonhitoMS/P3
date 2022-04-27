@@ -66,8 +66,8 @@ union YYSTYPE
 {
 #line 17 "aSin.y"
 
-double val; /* Para devolver números */
-char *lex; /* Para devolver punteros a la tabla de símbolos */
+double val; // no caso de números
+char *lex; // no caso de caracteres
 
 #line 73 "aSin.tab.h"
 
